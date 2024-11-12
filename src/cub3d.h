@@ -17,6 +17,15 @@
 # define WIDTH 750
 # define HEIGHT 750
 
+typedef struct {
+	int	start;
+	int	end;
+}	DrawLimits;
+
+typedef struct {
+	int	x;
+	int	y;
+}	TextureCoord;
 
 typedef struct s_texture
 {
@@ -101,8 +110,13 @@ int     is_white(char *fantom);
 /*	draw	*/
 void	draw(t_game *g, t_map *m, t_player *p);
 void	draw_column(t_game *g, int x, double d, t_txt *txt);
-unsigned int rgb_to_hex(char **cs);
+t_txt   *giv_txt(t_txt *a, t_txt *b, int hit);
+t_txt   *get_txt(t_info *ifs, double r, double posX, double posY);
+
+/*	d_utils	*/
+int	is_empty(char **map, double x, double y);
 double	min_step(double x, double y, double r);
+unsigned int rgb_to_hex(char **cs);
 double	find_d(double r, double x, double y, char **field);
 
 /*	colors	*/
