@@ -26,7 +26,7 @@ t_txt *get_txt(t_info *ifs, double r, double d, double posX)
     }
 }
 
-void	draw_column(t_game *g, int x, double d, t_txt *txt)
+void	draw_column(t_game *g, int x, double d, int col, t_txt *txt)
 {
 	int				texY;
 	int				startY;
@@ -49,7 +49,7 @@ void	draw_column(t_game *g, int x, double d, t_txt *txt)
 		{
 			texY = fmax(0, fmin(63, ((y - (HEIGHT - (int)(HEIGHT / d)) / 2) * 64) / (int)(HEIGHT /d)));
 			// Récupération de la couleur de la texture
-			color = txt->data[texY * 64 + (x % 64)];
+			color = txt->data[texY * 64 + (col % 64)];
 
 		}
 		else if (y > endY)
@@ -74,12 +74,12 @@ void	draw(t_game *g, t_map *m, t_player *p)
 	x = 0;
 	while (x < WIDTH)
 	{
+		int colonne;
 		offset = f_abs(p->vect_c - ray);
-		d = (find_d(ray, p->x, p->y, m->field)) * cos(offset);
-		draw_column(g, x, d, get_txt(g->map->info ,ray, d, p->x));
+		d = (find_d(ray, p->x, p->y, m->field, &colonne)) * cos(offset);
+		draw_column(g, x, d, colonne, get_txt(g->map->info ,ray, d, p->x));
 		ray += step;
 		x+=1;
 	}
 	mlx_put_image_to_window(g->mlx, g->win, g->img, 0, 0);
 }
-

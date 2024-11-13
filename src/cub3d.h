@@ -4,6 +4,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdio.h>
+# include <string.h>
 # include <fcntl.h>
 # include <math.h>
 
@@ -109,7 +110,7 @@ int     is_white(char *fantom);
 
 /*	draw	*/
 void	draw(t_game *g, t_map *m, t_player *p);
-void	draw_column(t_game *g, int x, double d, t_txt *txt);
+void	draw_column(t_game *g, int x, double d, int col, t_txt *txt);
 t_txt   *giv_txt(t_txt *a, t_txt *b, int hit);
 t_txt   *get_txt(t_info *ifs, double r, double posX, double posY);
 
@@ -117,7 +118,7 @@ t_txt   *get_txt(t_info *ifs, double r, double posX, double posY);
 int	is_empty(char **map, double x, double y);
 double	min_step(double x, double y, double r);
 unsigned int rgb_to_hex(char **cs);
-double	find_d(double r, double x, double y, char **field);
+double	find_d(double r, double x, double y, char **field, int *col);
 
 /*	colors	*/
 int	ft_strt_angle(char c);

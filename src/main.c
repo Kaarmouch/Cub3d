@@ -155,14 +155,26 @@ void	ft_mv(int key, t_game *g)
 	new_x = g->p->x;
 	new_y = g->p->y;
 
-	if (key == KEY_R)
-		new_x += 0.1;
-	else if (key == KEY_L)
-		new_x -= 0.1;
-	else if (key == KEY_U)
-		new_y -= 0.1;
-	else if (key == KEY_D)
-		new_y += 0.1;
+    if (key == KEY_D)  // Move forward
+    {
+        new_x += 0.1 * cos(g->p->vect_p);
+        new_y += 0.1 * sin(g->p->vect_p);
+    }
+    else if (key == KEY_U)  // Move backward
+    {
+        new_x -= 0.1 * cos(g->p->vect_p);
+        new_y -= 0.1 * sin(g->p->vect_p);
+    }
+    else if (key == KEY_L)  // Strafe right
+    {
+        new_x += 0.1 * cos(g->p->vect_p + PI/2);
+        new_y += 0.1 * sin(g->p->vect_p + PI/2);
+    }
+    else if (key == KEY_R)  // Strafe left
+    {
+        new_x += 0.1 * cos(g->p->vect_p - PI/2);
+        new_y += 0.1 * sin(g->p->vect_p - PI/2);
+    }
 	if (!is_wall(g->map->field, new_x, new_y))
 	{
 		g->p->x = new_x;

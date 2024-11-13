@@ -57,7 +57,7 @@ int	is_empty(char **map, double x, double y)
 	return (1);
 }
 
-double	find_d(double r, double x, double y, char **field)
+double	find_d(double r, double x, double y, char **field, int *col)
 {
 	double	dist;
 	double	step;
@@ -71,6 +71,16 @@ double	find_d(double r, double x, double y, char **field)
 		dist += step;
 		x = x + cos(r) * step;
 		y = y + sin(r) * step;
+	}
+	if (x - floor(x) < y - floor(y))
+	{
+		// collision en N/S
+		*col = f_abs(y - floor(y)) * 64;
+	}
+	else
+	{
+		// collision en E/W
+		*col = f_abs(x - floor(x)) * 64;
 	}
 	return(dist);
 }
