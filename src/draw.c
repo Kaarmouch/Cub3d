@@ -1,28 +1,28 @@
 #include "cub3d.h"
-
-t_txt *get_txt(t_info *ifs, double r, double d, double posX)
+t_txt	*get_txt(t_info *ifs, double r, double d, double posX, double posY)
 {
-	double impactX;
-	int	is_vertical_hit;
+    double impactX;
+    double impactY;
+    int is_vertical_hit;
 
-	impactX = posX + d * cos(r);
-	is_vertical_hit = 0;
-	if (fmod(impactX, 1.0) < 0.0001)
-		is_vertical_hit = 1;  // Impact sur un bord vertical (Est ou Ouest)
-	printf("impactx : %f, vertic %i\n",impactX, is_vertical_hit);
-	if (is_vertical_hit)
-	{
-		if (cos(r) > 0) 
-			return ifs->ew_txt;
-		else
-			return ifs->ww_txt;
-	}
-	else
-	{
-		if (sin(r) > 0)
-			return ifs->nw_txt;
-		else 
-			return ifs->sw_txt;
+    is_vertical_hit = 0;
+    impactX = posX + d * cos(r);
+    impactY = posY + d * sin(r);
+    if (f_abs(impactX - floor(impactX)) < f_abs(impactY - floor(impactY)))
+        is_vertical_hit = 1;  // Impact sur un bord vertical (Est ou Ouest)
+    if (is_vertical_hit)
+    {
+        if (cos(r) > 0)
+            return ifs->ew_txt;  // Bord Est
+        else
+            return ifs->ww_txt;  // Bord Ouest
+    }
+    else
+    {
+        if (sin(r) > 0)
+            return ifs->nw_txt;  // Bord Nord
+        else
+            return ifs->sw_txt;  // Bord Sud
     }
 }
 
@@ -48,9 +48,7 @@ void	draw_column(t_game *g, int x, double d, int col, t_txt *txt)
 		else if (y >= startY && y <= endY)
 		{
 			texY = fmax(0, fmin(63, ((y - (HEIGHT - (int)(HEIGHT / d)) / 2) * 64) / (int)(HEIGHT /d)));
-			// Récupération de la couleur de la texture
 			color = txt->data[texY * 64 + (col % 64)];
-
 		}
 		else if (y > endY)
 			color = rgb_to_hex(g->map->info->flor_c);
@@ -77,7 +75,7 @@ void	draw(t_game *g, t_map *m, t_player *p)
 		int colonne;
 		offset = f_abs(p->vect_c - ray);
 		d = (find_d(ray, p->x, p->y, m->field, &colonne)) * cos(offset);
-		draw_column(g, x, d, colonne, get_txt(g->map->info ,ray, d, p->x));
+		draw_column(g, x, d, colonne, get_txt(g->map->info ,ray, d, p->x, p->y));
 		ray += step;
 		x+=1;
 	}

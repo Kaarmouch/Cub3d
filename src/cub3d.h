@@ -11,10 +11,12 @@
 # define BUFFER_SIZE 42
 # define PI 3.141592
 #define KEY_ESC 65307
-#define KEY_D 65362
-#define KEY_U 65364
-#define KEY_L 65363
-#define KEY_R 65361
+#define KEY_D 115
+#define KEY_U 122
+#define KEY_L 113
+#define KEY_R 100
+#define KEY_A 65361
+#define KEY_E 65363
 # define WIDTH 750
 # define HEIGHT 750
 
@@ -101,6 +103,10 @@ int	ft_len(char *s);
 char	*wrd_dup(char *str, int start, int finish);
 char	**supstr_dup(char **src, int nb_l);
 
+/*	input	*/
+int     key_press(int keycode, t_game *g);
+void	ft_rotate(int key, t_game *g);
+void	ft_mv(int key, t_game *g);
 
 /*	b_utils	*/
 int	flood(char **map, int x, int y, int H);
@@ -112,7 +118,7 @@ int     is_white(char *fantom);
 void	draw(t_game *g, t_map *m, t_player *p);
 void	draw_column(t_game *g, int x, double d, int col, t_txt *txt);
 t_txt   *giv_txt(t_txt *a, t_txt *b, int hit);
-t_txt   *get_txt(t_info *ifs, double r, double posX, double posY);
+t_txt   *get_txt(t_info *ifs, double r, double d, double posX, double posY);
 
 /*	d_utils	*/
 int	is_empty(char **map, double x, double y);

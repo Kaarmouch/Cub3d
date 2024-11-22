@@ -147,52 +147,6 @@ int	is_wall(char **map, double x, double y)
 	return (map[grid_y][grid_x] == '1');
 }
 
-void	ft_mv(int key, t_game *g)
-{
-	double new_x;
-	double new_y;
-
-	new_x = g->p->x;
-	new_y = g->p->y;
-
-    if (key == KEY_D)  // Move forward
-    {
-        new_x += 0.1 * cos(g->p->vect_p);
-        new_y += 0.1 * sin(g->p->vect_p);
-    }
-    else if (key == KEY_U)  // Move backward
-    {
-        new_x -= 0.1 * cos(g->p->vect_p);
-        new_y -= 0.1 * sin(g->p->vect_p);
-    }
-    else if (key == KEY_L)  // Strafe right
-    {
-        new_x += 0.1 * cos(g->p->vect_p + PI/2);
-        new_y += 0.1 * sin(g->p->vect_p + PI/2);
-    }
-    else if (key == KEY_R)  // Strafe left
-    {
-        new_x += 0.1 * cos(g->p->vect_p - PI/2);
-        new_y += 0.1 * sin(g->p->vect_p - PI/2);
-    }
-	if (!is_wall(g->map->field, new_x, new_y))
-	{
-		g->p->x = new_x;
-		g->p->y = new_y;
-	}
-}
-
-int     key_press(int keycode, t_game *g)
-{
-        if (keycode == KEY_ESC) // escap
-                exit_with_error(g ,"BYE");
-        if (keycode >= 65361 && keycode <= 65364)
-                ft_mv(keycode, g);
-        mlx_clear_window(g->mlx, g->win);
-        draw(g, g->map, g->p);
-        return (0);
-}
-
 int	main(int argc, char **argv)
 {
 	t_game	game;
@@ -204,8 +158,8 @@ int	main(int argc, char **argv)
 	print_game(&game);
 	draw(&game, game.map, game.p);
 	mlx_hook(game.win, 17, 0, (int (*)())free_game, &game);
-	mlx_key_hook(game.win, key_press, &game);
-	mlx_loop(game.mlx);
+	//mlx_key_hook(game.win, key_press, &game);
+	//mlx_loop(game.mlx);
 	free_game(&game);
 	return (0);
 }

@@ -6,6 +6,7 @@ int	add_wall_txt(t_game *g, t_info *info, char *path, int *i)
 	int	ok;
 
 	tmp = wrd_dup(path, (find_c(path, ' ') + 1), ft_len(path));
+	ok = 0;
 	if (!find_c(path, 'N'))
 		ok = load_texture(info->nw_txt, tmp, g->mlx);
 	if (!find_c(path, 'S'))

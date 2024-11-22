@@ -14,7 +14,8 @@ MLX_LIB		=	$(addprefix $(MLX_PATH), $(MLX_FILE))
 MLX_EX		=	$(MLX_LIB) $(MLX_FLAG)
 
 C_FILE		= main.c  out.c  utils.c load.c gnl.c  build_cube.c\
-		b_utils.c draw.c d_utils.c build_color.c  clean_init.c
+		b_utils.c draw.c d_utils.c build_color.c  clean_init.c\
+		input.c \
 
 SRC_DIR		=	./src/
 

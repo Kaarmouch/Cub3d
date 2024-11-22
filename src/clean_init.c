@@ -2,7 +2,7 @@
 
 void init_texture(t_txt *texture)
 {
-	memset(texture, 0, sizeof(texture));
+	memset(texture, 0, sizeof(*texture));
 }
 
 int	init_info(t_info *info) 
@@ -21,12 +21,16 @@ int	init_info(t_info *info)
 	info->celing_c = malloc(sizeof(char *) * 4);
 	if (!info->celing_c || !info->flor_c)
 		return (0);
+	memset(info->flor_c, 0, sizeof(char *) * 4);
+	memset(info->celing_c, 0, sizeof(char *) * 4);
 	return (1);
 }
 
 int	init_map(t_map *map, char *path)
 {
 	map->fd = open(path, O_RDONLY);
+	if (map->fd < 0)
+		return (0);
 	map->H = 0;
 	map->W = 0;
 	map->field = NULL;
@@ -48,7 +52,7 @@ void	init_player(t_player *player)
 
 void	init_game(t_game *game, char *path)
 {
-	memset(game, 0, sizeof(game));
+	memset(game, 0, sizeof(*game));
 	game->map = malloc(sizeof(t_map));
 	if (!game->map)
 		exit_with_error(game, "Failed to allocate memory for map");

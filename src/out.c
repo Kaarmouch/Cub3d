@@ -16,8 +16,10 @@ void	free_info(t_info *info, void *mlx)
 	free_texture(mlx, info->sw_txt);
 	free_texture(mlx, info->ew_txt);
 	free_texture(mlx, info->ww_txt);
-	free_split(info->flor_c);
-	free_split(info->celing_c);
+	if (info->flor_c)
+		free_split(info->flor_c);
+	if (info->celing_c)
+		free_split(info->celing_c);
 	free(info);
 }
 
