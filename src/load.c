@@ -44,6 +44,8 @@ int     load_texture(t_txt *t, char *path, void *mlx)
 	int	w;
 	int	h;
 
+	if (t->img)
+		return (0);
         t->img = mlx_xpm_file_to_image(mlx, path, &w, &h);
         if (!t->img)
                 return (0);

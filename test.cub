@@ -1,5 +1,5 @@
 
-NO testure/north.xpm
+NO texture/north.xpm
 
 SO texture/south.xpm
 
@@ -7,7 +7,7 @@ WE texture/west.xpm
 
 EA texture/east.xpm
 
-F 220,100,0
+F 220,200,0
 
 
 C 225,30,0

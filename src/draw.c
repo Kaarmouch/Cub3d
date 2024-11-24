@@ -8,21 +8,22 @@ t_txt	*get_txt(t_info *ifs, double r, double d, double posX, double posY)
     is_vertical_hit = 0;
     impactX = posX + d * cos(r);
     impactY = posY + d * sin(r);
-    if (f_abs(impactX - floor(impactX)) < f_abs(impactY - floor(impactY)))
+    printf("cos(r)%f, X:%f,Y:%f\n",cos(r),impactX, impactY);
+    if (impactX - floor(impactX) < impactY - floor(impactY))
         is_vertical_hit = 1;  // Impact sur un bord vertical (Est ou Ouest)
     if (is_vertical_hit)
     {
         if (cos(r) > 0)
-            return ifs->ew_txt;  // Bord Est
+            return ifs->ww_txt;
         else
-            return ifs->ww_txt;  // Bord Ouest
+            return ifs->ew_txt;
     }
     else
     {
         if (sin(r) > 0)
-            return ifs->nw_txt;  // Bord Nord
+            return ifs->sw_txt;
         else
-            return ifs->sw_txt;  // Bord Sud
+            return ifs->nw_txt;
     }
 }
 

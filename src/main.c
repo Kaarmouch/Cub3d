@@ -158,8 +158,8 @@ int	main(int argc, char **argv)
 	print_game(&game);
 	draw(&game, game.map, game.p);
 	mlx_hook(game.win, 17, 0, (int (*)())free_game, &game);
-	//mlx_key_hook(game.win, key_press, &game);
-	//mlx_loop(game.mlx);
+	mlx_key_hook(game.win, key_press, &game);
+	mlx_loop(game.mlx);
 	free_game(&game);
 	return (0);
 }

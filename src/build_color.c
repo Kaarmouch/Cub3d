@@ -36,6 +36,8 @@ int	is_color(char *c)
 
 	flag = 0;
 	i = 0;
+	if (!c || !c[i])
+		return (0);
 	while (c[i])
 	{
 		if (c[i] == ',')
@@ -52,6 +54,8 @@ int	is_color(char *c)
 		}
 		i+=1;
 	}
+	if (flag != 2)
+		return (0);
 	return (1);
 }
 
@@ -64,7 +68,7 @@ int	get_colors(char **dst, char *colors)
 	strt = 0;
 	i = 0;
 	end = 0;
-	if (!dst)
+	if (!dst || !is_color(colors))
 		return (0);
 	while (i < 3)
 	{	

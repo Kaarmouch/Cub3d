@@ -26,7 +26,7 @@ char	**supstr_dup(char **src, int nb_l)
 			return (NULL);
 		i++;
 	}
-	new[i] = '\0';
+	new[i] = NULL;
 	return (new);
 }
 

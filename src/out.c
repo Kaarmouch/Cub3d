@@ -51,7 +51,8 @@ int	free_game(t_game *g)
 			free_split(g->map->field);
 		free(g->map);
 	}
-	free(g->p);
+	if (g->p)
+		free(g->p);
 	free_display(g);
 	return (1);
 }

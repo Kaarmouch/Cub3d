@@ -15,9 +15,9 @@ int	add_wall_txt(t_game *g, t_info *info, char *path, int *i)
 		ok = load_texture(info->ww_txt, tmp, g->mlx);
 	if (!find_c(path, 'E'))
 		ok = load_texture(info->ew_txt, tmp, g->mlx);
-	if (!find_c(path, 'F') && is_color(tmp))
+	if (!find_c(path, 'F'))
 		ok = get_colors(info->flor_c, tmp);
-	if (!find_c(path, 'C') && is_color(tmp))
+	if (!find_c(path, 'C'))
 		ok = get_colors(info->celing_c, tmp);
 	free(tmp);
 	*i+=ok;

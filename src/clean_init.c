@@ -28,15 +28,16 @@ int	init_info(t_info *info)
 
 int	init_map(t_map *map, char *path)
 {
+	map->field = NULL;
+	map->info = malloc(sizeof(t_info));
+	if (!map->info)
+		return (0);
+	memset(map->info, 0, sizeof(*map->info));
 	map->fd = open(path, O_RDONLY);
 	if (map->fd < 0)
 		return (0);
 	map->H = 0;
 	map->W = 0;
-	map->field = NULL;
-	map->info = malloc(sizeof(t_info));
-	if (!map->info)
-		return (0);
 	if (!init_info(map->info))
 		return (0);
 	return (1);
