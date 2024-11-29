@@ -147,6 +147,13 @@ int	is_wall(char **map, double x, double y)
 	return (map[grid_y][grid_x] == '1');
 }
 
+int	close_window(t_game *game)
+{
+	free_game(game);
+	exit(0); // Ensures the program exits completely
+	return (0); // Returning 0 for mlx_hook compatibility
+}
+
 int	main(int argc, char **argv)
 {
 	t_game	game;
@@ -155,9 +162,9 @@ int	main(int argc, char **argv)
 		return (write(1,"ERROR\n", 6));
 	init_game(&game, argv[1]);
 	load_cube(&game);
-	print_game(&game);
+//	print_game(&game);
 	draw(&game, game.map, game.p);
-	mlx_hook(game.win, 17, 0, (int (*)())free_game, &game);
+	mlx_hook(game.win, 17, 0, close_window, &game);
 	mlx_key_hook(game.win, key_press, &game);
 	mlx_loop(game.mlx);
 	free_game(&game);

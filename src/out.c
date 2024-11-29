@@ -45,6 +45,7 @@ int	free_game(t_game *g)
 	{
 		if (g->map->info)
 			free_info(g->map->info, g->mlx);
+		free_display(g);
 		if (g->map->fd != -1)
 			close(g->map->fd);
 		if (g->map->field)
@@ -53,7 +54,6 @@ int	free_game(t_game *g)
 	}
 	if (g->p)
 		free(g->p);
-	free_display(g);
 	return (1);
 }
 
