@@ -12,8 +12,8 @@ char	*ft_strdup(char *src)
 	i = 0;
 	while (src[i])
 	{
-	   dest[i] = src[i];
-	   i++;
+		dest[i] = src[i];
+		i++;
 	}
 	dest[i] = '\0';
 	return (dest);
@@ -24,12 +24,10 @@ char	*get_next_info(int fd)
 	static char	buffer[BUFFER_SIZE];
 	char		line[70000];
 	static int	buffer_read;
-	static int 	buffer_pos;
+	static int	buffer_pos;
 	int			i;
 
 	i = 0;
-	if (fd < 0 || BUFFER_SIZE <= 0)
-		return (NULL);
 	while (1)
 	{
 		if (buffer_pos >= buffer_read)

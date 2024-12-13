@@ -6,7 +6,7 @@ void	free_texture(void *mlx, t_txt *texture)
 	{
 		if (texture->img)
 			mlx_destroy_image(mlx, texture->img);
-		free(texture); 
+		free(texture);
 	}
 }
 
@@ -26,9 +26,7 @@ void	free_info(t_info *info, void *mlx)
 void	free_display(t_game *g)
 {
 	if (g->img)
-	{
-		mlx_destroy_image(g->mlx, g->img); // Libérer l'image
-	}
+		mlx_destroy_image(g->mlx, g->img);
 	if (g->win && g->mlx)
 		mlx_destroy_window(g->mlx, g->win);
 	if (g->mlx)
@@ -41,7 +39,7 @@ void	free_display(t_game *g)
 
 int	free_game(t_game *g)
 {
-	if (g->map) 
+	if (g->map)
 	{
 		if (g->map->info)
 			free_info(g->map->info, g->mlx);
@@ -57,12 +55,10 @@ int	free_game(t_game *g)
 	return (1);
 }
 
-void exit_with_error(t_game *game, const char *message)
+void	exit_with_error(t_game *game, const char *message)
 {
-    if (message)
-        printf("Error: %s\n", message);
-
-    free_game(game);
-
-    exit(EXIT_FAILURE);
+	if (message)
+		printf("Error: %s\n", message);
+	free_game(game);
+	exit(EXIT_FAILURE);
 }

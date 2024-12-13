@@ -1,5 +1,12 @@
 #include "cub3d.h"
 
+double	f_abs(double a)
+{
+	if (a < 0)
+		return (-a);
+	return (a);
+}
+
 double	min_step(double x, double y, double r)
 {
 	double	d_x;
@@ -26,11 +33,10 @@ double	min_step(double x, double y, double r)
 		return (d_y);
 	else if (!sin(r))
 		return (d_x);
-	out = min((d_x/f_abs(cos(r))) , (d_y/f_abs(sin(r))));
-	return (out);
+	return (min((d_x / f_abs(cos(r))), (d_y / f_abs(sin(r)))));
 }
 
-unsigned int rgb_to_hex(char **cs)
+unsigned int	rgb_to_hex(char **cs)
 {
 	int	r;
 	int	g;
@@ -39,15 +45,16 @@ unsigned int rgb_to_hex(char **cs)
 	r = atoi_color(cs[0]);
 	g = atoi_color(cs[1]);
 	b = atoi_color(cs[2]);
-
 	return ((r << 16) | (g << 8) | b);
 }
 
 int	is_empty(char **map, double x, double y)
 {
-	int grid_x = (int)x;
-	int grid_y = (int)y;
+	int	grid_x;
+	int	grid_y;
 
+	grid_x = (int)x;
+	grid_y = (int)y;
 	if (map[grid_y][grid_x] == '1')
 		return (0);
 	if ((x - grid_x) == 0.0 && map[grid_y][grid_x - 1] == '1')
@@ -57,30 +64,26 @@ int	is_empty(char **map, double x, double y)
 	return (1);
 }
 
-double	find_d(double r, double x, double y, char **field, int *col)
+t_dd	*find_d(double r, double x, double y, char **field)
 {
-	double	dist;
 	double	step;
-	int	i = 0;
+	int		i;
+	t_dd	*info;
 
-	dist = 0.0;
+	i = 0;
+	info = malloc(sizeof(t_dd));
+	info->d = 0.0;
 	step = 0;
-	while (is_empty(field, x , y))
+	while (is_empty(field, x, y))
 	{
 		step = min_step(x, y, r);
-		dist += step;
+		info->d += step;
 		x = x + cos(r) * step;
 		y = y + sin(r) * step;
 	}
 	if (x - floor(x) < y - floor(y))
-	{
-		// collision en N/S
-		*col = f_abs(y - floor(y)) * 64;
-	}
+		info->col = f_abs(y - floor(y)) * 64;
 	else
-	{
-		// collision en E/W
-		*col = f_abs(x - floor(x)) * 64;
-	}
-	return(dist);
+		info->col = f_abs(x - floor(x)) * 64;
+	return (info);
 }

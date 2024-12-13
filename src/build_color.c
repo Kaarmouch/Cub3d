@@ -23,7 +23,7 @@ int	atoi_color(char *str)
 	while (str[i])
 	{
 		nbr = nbr * 10 + (str[i] - '0');
-		i+=1;
+		i += 1;
 	}
 	return (nbr);
 }
@@ -43,16 +43,12 @@ int	is_color(char *c)
 		if (c[i] == ',')
 		{
 			if (i == 0 || flag > 2)
-			{
 				return (0);
-			}
-			flag +=1;
+			flag += 1;
 		}
 		else if (c[i] > '9' || c[i] < '0')
-		{
 			return (0);
-		}
-		i+=1;
+		i += 1;
 	}
 	if (flag != 2)
 		return (0);
@@ -64,23 +60,22 @@ int	get_colors(char **dst, char *colors)
 	int	strt;
 	int	end;
 	int	i;
-	
+
 	strt = 0;
 	i = 0;
 	end = 0;
 	if (!dst || !is_color(colors))
 		return (0);
 	while (i < 3)
-	{	
+	{
 		if (i < 2)
 			end += find_c(&colors[strt], ',');
 		else
 			end = ft_len(colors);
 		dst[i] = wrd_dup(colors, strt, end);
 		strt = end + 1;
-		end+=1;
+		end += 1;
 		i++;
-
 	}
 	dst[i] = NULL;
 	return (1);

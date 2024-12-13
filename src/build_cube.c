@@ -3,24 +3,24 @@
 int	add_wall_txt(t_game *g, t_info *info, char *path, int *i)
 {
 	char	*tmp;
-	int	ok;
+	int		ok;
 
 	tmp = wrd_dup(path, (find_c(path, ' ') + 1), ft_len(path));
 	ok = 0;
-	if (!find_c(path, 'N'))
+	if (!find_c(path, 'N') && !find_c(&path[1], 'O'))
 		ok = load_texture(info->nw_txt, tmp, g->mlx);
-	if (!find_c(path, 'S'))
+	if (!find_c(path, 'S') && !find_c(&path[1], 'O'))
 		ok = load_texture(info->sw_txt, tmp, g->mlx);
-	if (!find_c(path, 'W'))
+	if (!find_c(path, 'W') && !find_c(&path[1], 'E'))
 		ok = load_texture(info->ww_txt, tmp, g->mlx);
-	if (!find_c(path, 'E'))
+	if (!find_c(path, 'E') && !find_c(&path[1], 'A'))
 		ok = load_texture(info->ew_txt, tmp, g->mlx);
 	if (!find_c(path, 'F'))
 		ok = get_colors(info->flor_c, tmp);
 	if (!find_c(path, 'C'))
 		ok = get_colors(info->celing_c, tmp);
 	free(tmp);
-	*i+=ok;
+	*i += ok;
 	return (ok);
 }
 
@@ -35,7 +35,7 @@ int	info_player(char **m, t_player *p)
 	{
 		if (m[l][c] == 'E' || m[l][c] == 'S' || m[l][c] == 'W'
 				|| m[l][c] == 'N')
-			break;
+			break ;
 		c++;
 		if (!m[l][c])
 		{
@@ -59,7 +59,7 @@ int	build_terrain(t_map *map, char *line, int idx)
 	int		i;
 
 	i = 0;
-	map->H = idx + 1;
+	map->h = idx + 1;
 	tmp = malloc(sizeof(char *) * (idx + 2));
 	if (!tmp)
 		return (0);
@@ -75,11 +75,10 @@ int	build_terrain(t_map *map, char *line, int idx)
 	map->field = tmp;
 	if (!is_terrain(map->field[idx]))
 		return (0);
-	if (map->W <= ft_len(map->field[idx]))
-		map->W = ft_len(map->field[idx]);
+	if (map->w <= ft_len(map->field[idx]))
+		map->w = ft_len(map->field[idx]);
 	return (1);
 }
-
 
 int	build_map(t_game *g, t_map *map)
 {
@@ -90,8 +89,8 @@ int	build_map(t_game *g, t_map *map)
 	while (1)
 	{
 		line = get_next_info(map->fd);
-		if(!line)
-			break;
+		if (!line)
+			break ;
 		if (i < 6 && line[0])
 		{
 			if (!add_wall_txt(g, map->info, line, &i))
@@ -105,5 +104,7 @@ int	build_map(t_game *g, t_map *map)
 		}
 		free(line);
 	}
-	return (i < 6 ?0:1);
+	if (i < 6)
+		return (0);
+	return (1);
 }

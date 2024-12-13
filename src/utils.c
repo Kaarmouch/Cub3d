@@ -56,11 +56,10 @@ int	ft_cmp(char *o, char *t)
 			return (0);
 		i++;
 	}
-	if(t[i])
+	if (t[i])
 		return (0);
 	return (1);
 }
-
 
 int	find_c(char *str, char c)
 {

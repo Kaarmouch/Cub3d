@@ -1,11 +1,11 @@
 #include "cub3d.h"
 
-void init_texture(t_txt *texture)
+void	init_texture(t_txt *texture)
 {
 	memset(texture, 0, sizeof(*texture));
 }
 
-int	init_info(t_info *info) 
+int	init_info(t_info *info)
 {
 	info->nw_txt = malloc(sizeof(t_txt));
 	info->sw_txt = malloc(sizeof(t_txt));
@@ -36,8 +36,8 @@ int	init_map(t_map *map, char *path)
 	map->fd = open(path, O_RDONLY);
 	if (map->fd < 0)
 		return (0);
-	map->H = 0;
-	map->W = 0;
+	map->h = 0;
+	map->w = 0;
 	if (!init_info(map->info))
 		return (0);
 	return (1);
