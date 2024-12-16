@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aglampor <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/16 17:51:11 by aglampor          #+#    #+#             */
+/*   Updated: 2024/12/16 17:57:59 by aglampor         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CUB3D_H
 # define CUB3D_H
 # include "../minilibx/mlx.h"
@@ -125,7 +137,7 @@ t_txt			*get_txt(t_info *ifs, double r, double d, t_pos *p);
 int				is_empty(char **map, double x, double y);
 double			min_step(double x, double y, double r);
 unsigned int	rgb_to_hex(char **cs);
-t_dd		*find_d(double r, double x, double y, char **field);
+t_dd			*find_d(double r, double x, double y, char **field);
 
 /*	colors	*/
 int				ft_strt_angle(char c);

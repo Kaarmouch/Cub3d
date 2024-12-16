@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   draw.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aglampor <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/16 17:51:39 by aglampor          #+#    #+#             */
+/*   Updated: 2024/12/16 18:33:20 by aglampor         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 t_txt	*get_txt(t_info *ifs, double r, double d, t_pos *p)
@@ -36,18 +48,18 @@ void	draw_column(t_game *g, int x, t_dd *i, t_txt *txt)
 	unsigned int	color;
 
 	s_y = fmax(0, (HEIGHT - (int)(HEIGHT / i->d)) / 2);
-	e_y = fmin(HEIGHT - 1, strt_y + (int)(HEIGHT / i->d));
+	e_y = fmin(HEIGHT - 1, s_y + (int)(HEIGHT / i->d));
 	y = 0;
 	while (y < HEIGHT)
 	{
-		if (y < strt_y)
+		if (y < s_y)
 			color = rgb_to_hex(g->map->info->celing_c);
 		else if (y >= s_y && y <= e_y)
 		{
-			t_y = fmax(0, fmin(63, ((y - s_y) * 64) / (int)(HEIGHT / i->d)));
+			t_y = fmax(0, fmin(63, (((y - s_y) * 64) / (int)(HEIGHT / i->d))));
 			color = txt->data[t_y * 64 + (i->col % 64)];
 		}
-		else if (y > end_y)
+		else if (y > e_y)
 			color = rgb_to_hex(g->map->info->flor_c);
 		((unsigned int *)g->data)[y * WIDTH + x] = color;
 		y++;
