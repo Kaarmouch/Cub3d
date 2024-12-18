@@ -6,7 +6,7 @@
 /*   By: aglampor <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 17:51:11 by aglampor          #+#    #+#             */
-/*   Updated: 2024/12/16 17:57:59 by aglampor         ###   ########.fr       */
+/*   Updated: 2024/12/18 15:50:57 by aglampor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 # define KEY_A 65361
 # define KEY_E 65363
 # define WIDTH 750
-# define HEIGHT 750
+# define HT 750
 
 typedef struct s_coordo
 {

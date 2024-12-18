@@ -6,7 +6,7 @@
 /*   By: aglampor <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 17:51:39 by aglampor          #+#    #+#             */
-/*   Updated: 2024/12/16 18:33:20 by aglampor         ###   ########.fr       */
+/*   Updated: 2024/12/18 15:51:56 by aglampor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,16 +47,17 @@ void	draw_column(t_game *g, int x, t_dd *i, t_txt *txt)
 	int				y;
 	unsigned int	color;
 
-	s_y = fmax(0, (HEIGHT - (int)(HEIGHT / i->d)) / 2);
-	e_y = fmin(HEIGHT - 1, s_y + (int)(HEIGHT / i->d));
+	s_y = fmax(0, (HT - (int)(HT / i->d)) / 2);
+	e_y = fmin(HT - 1, s_y + (int)(HT / i->d));
 	y = 0;
-	while (y < HEIGHT)
+	while (y < HT)
 	{
 		if (y < s_y)
 			color = rgb_to_hex(g->map->info->celing_c);
 		else if (y >= s_y && y <= e_y)
 		{
-			t_y = fmax(0, fmin(63, (((y - s_y) * 64) / (int)(HEIGHT / i->d))));
+			t_y = fmax(0, fmin(63, ((y - (HT - (int)(HT / i->d)) / 2) * 64)
+						/ (int)(HT / i->d)));
 			color = txt->data[t_y * 64 + (i->col % 64)];
 		}
 		else if (y > e_y)
