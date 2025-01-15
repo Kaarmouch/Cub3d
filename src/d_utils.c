@@ -23,7 +23,6 @@ double	min_step(double x, double y, double r)
 {
 	double	d_x;
 	double	d_y;
-	double	out;
 
 	if (cos(r) > 0)
 		d_x = 1 + (int)x - x;
@@ -79,10 +78,8 @@ int	is_empty(char **map, double x, double y)
 t_dd	*find_d(double r, double x, double y, char **field)
 {
 	double	step;
-	int		i;
 	t_dd	*info;
 
-	i = 0;
 	info = malloc(sizeof(t_dd));
 	info->d = 0.0;
 	step = 0;

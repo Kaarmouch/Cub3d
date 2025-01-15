@@ -16,7 +16,7 @@ void	load_img(t_game *g)
 {
 	char	*adr;
 
-	g->img = mlx_new_image(g->mlx, WIDTH, HEIGHT);
+	g->img = mlx_new_image(g->mlx, WIDTH, HT);
 	if (!(g->img))
 		exit_with_error(g, "Failled to allocate memory for mlx_img");
 	adr = mlx_get_data_addr(g->img, &g->bits_pp, &g->s_line, &g->endian);
@@ -28,7 +28,7 @@ void	load_mlx(t_game *g)
 	g->mlx = mlx_init();
 	if (!g->mlx)
 		exit_with_error(g, "Failled init the mlx");
-	g->win = mlx_new_window(g->mlx, WIDTH, HEIGHT, "1CUB3DEN22");
+	g->win = mlx_new_window(g->mlx, WIDTH, HT, "1CUB3DEN22");
 	if (!g->win)
 		exit_with_error(g, "Failled init the new window");
 }

@@ -43,7 +43,6 @@ int	atoi_color(char *str)
 int	is_color(char *c)
 {
 	int	i;
-	int	nb;
 	int	flag;
 
 	flag = 0;
